@@ -1,0 +1,199 @@
+.footer-link {
+    text-decoration: none;
+    /* إزالة الخط السفلي */
+    color: inherit;
+    /* إبقاء اللون كما هو */
+    font-family: inherit;
+    /* إبقاء نوع الخط كما هو */
+    font-size: inherit;
+    /* إبقاء الحجم كما هو */
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .imghome {
+        width: 250px;
+    }
+
+    .image-section img {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 3rem;
+    }
+
+    .text-section h1 {
+        padding-top: 50px;
+        font-size: 2.5rem;
+    }
+
+    .text-section p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    .text-section h1 {
+        font-size: 2rem;
+    }
+
+    .text-section p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .contact-form button {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-icons img {
+        width: 30px;
+        height: auto;
+    }
+    .footer-text{
+    font-size: 0.7rem;
+
+    }
+}
+
+@media (max-width: 768px) {
+    .ideas {
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+
+    .idea-item {
+        width: 100%;
+        margin: 15px 0;
+    }
+
+
+    @media (max-width: 768px) {
+
+        .imgS {
+            height: 40vh;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .slider {
+            height: 250px;
+
+        }
+
+        .slider img {
+            object-fit: cover;
+            height: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .slider {
+            height: 200px;
+        }
+
+        .slider img {
+            object-fit: cover;
+            height: 100%;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+nav .menu-icon {
+
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+nav .menu-icon span {
+    width: 25px;
+    height: 4px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        /* إخفاء القائمة بشكل افتراضي */
+        flex-direction: column;
+        width: 100%;
+        background-color: #333;
+        padding: 10px 0;
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    nav .menu-icon {
+        display: flex;
+        /* إظهار أيقونة الهمبرغر */
+    }
+
+    nav.active ul {
+        display: flex;
+        /* عرض القائمة عند الضغط على الأيقونة */
+    }
+}
