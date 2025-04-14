@@ -39,14 +39,15 @@ app.post('/send-message', (req, res) => {
   const newMessage = new Message({ name, email, subject, message });
 
   newMessage.save()
-    .then(() => {
-      console.log("Message saved to database");
-      res.sendFile(path.join(__dirname, 'index.html'));  // العودة لصفحة الـ Index بعد الإرسال
-    })
-    .catch((err) => {
-      console.error("Error saving message:", err);
-      res.status(500).send("Error saving message");
-    });
+  .then(() => {
+    console.log("Message saved to database");
+    res.status(200).json({ success: true, message: "Message saved" });
+  })
+  .catch((err) => {
+    console.error("Error saving message:", err);
+    res.status(500).json({ success: false, message: "Error saving message" });
+  });
+
 });
 
 // إرسال آخر رسالة من قاعدة البيانات
