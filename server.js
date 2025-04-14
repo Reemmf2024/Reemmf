@@ -3,14 +3,14 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
-const PORT = process.env.PORT || 3000;  // استخدام PORT من البيئة إذا كان موجودًا
+const PORT = process.env.PORT || 3000;  // تأكد من استخدام PORT المناسب في بيئة Render
 
 // إعدادات قراءة البيانات من الفورم
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname)));
 
-// الاتصال بقاعدة البيانات MongoDB عبر MongoDB Atlas
-mongoose.connect('mongodb+srv://reemi:UHQwdmq6GAub7ria@cluster0.ypuvlzu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+// الاتصال بقاعدة البيانات MongoDB باستخدام المتغير البيئي MONGO_URI
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -34,7 +34,7 @@ const Message = mongoose.model('Message', messageSchema);
 // لتخزين آخر رسالة (من قاعدة البيانات)
 app.post('/send-message', (req, res) => {
   const { name, email, subject, message } = req.body;
-  
+
   // إنشاء رسالة جديدة في قاعدة البيانات
   const newMessage = new Message({ name, email, subject, message });
 
@@ -68,5 +68,5 @@ app.get('/', (req, res) => {
 
 // تشغيل السيرفر
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);  // تأكد من أنك تستخدم الرابط المناسب هنا في حالة العمل على استضافة
+  console.log(`Server running on http://localhost:${PORT}`);
 });
