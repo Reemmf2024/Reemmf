@@ -192,34 +192,6 @@
                     </div>
                     <button name="submit" type="submit">Send Message</button>
                 </form>
-
-                <script>
-document.getElementById("contactForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
-
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData);
-
-  try {
-    const res = await fetch("https://reemmf.onrender.com/send-message", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    const result = await res.json();
-    if (result.success) {
-      alert("Message sent successfully!");
-      this.reset();
-    } else {
-      alert("There was a problem: " + result.message);
-    }
-  } catch (err) {
-    alert("Something went wrong. Please try again.");
-    console.error(err);
-  }
-});
-</script>
             </div>
         </section>
     </main>
