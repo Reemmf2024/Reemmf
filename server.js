@@ -3,13 +3,13 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;  // استخدام PORT من البيئة إذا كان موجودًا
 
 // إعدادات قراءة البيانات من الفورم
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname)));
 
-// الاتصال بقاعدة البيانات MongoDB
+// الاتصال بقاعدة البيانات MongoDB عبر MongoDB Atlas
 mongoose.connect('mongodb+srv://reemi:UHQwdmq6GAub7ria@cluster0.ypuvlzu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -39,15 +39,14 @@ app.post('/send-message', (req, res) => {
   const newMessage = new Message({ name, email, subject, message });
 
   newMessage.save()
-  .then(() => {
-    console.log("Message saved to database");
-    res.status(200).json({ success: true, message: "Message saved" });
-  })
-  .catch((err) => {
-    console.error("Error saving message:", err);
-    res.status(500).json({ success: false, message: "Error saving message" });
-  });
-
+    .then(() => {
+      console.log("Message saved to database");
+      res.sendFile(path.join(__dirname, 'index.html'));  // العودة لصفحة الـ Index بعد الإرسال
+    })
+    .catch((err) => {
+      console.error("Error saving message:", err);
+      res.status(500).send("Error saving message");
+    });
 });
 
 // إرسال آخر رسالة من قاعدة البيانات
@@ -69,6 +68,5 @@ app.get('/', (req, res) => {
 
 // تشغيل السيرفر
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);  // تأكد من أنك تستخدم الرابط المناسب هنا في حالة العمل على استضافة
 });
-
