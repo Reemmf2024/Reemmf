@@ -177,7 +177,7 @@
                 <p class="contact-message"> Swing by for a cup of coffee, or leave me a message :- </p>
                 
                 <!-- Contact Form -->
-                <form class="contact-form" action="https://reemmf.onrender.com/send-message" method="POST">
+                <form class="contact-form" id="contact-form" method="POST">
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Your Name" required>
                     </div>
@@ -195,6 +195,43 @@
             </div>
         </section>
     </main>
+
+  
+    <script>
+  document.getElementById('contact-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message')
+    };
+
+    try {
+      const res = await fetch('https://reemmf.onrender.com/submit-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        alert("تم إرسال الرسالة بنجاح!");
+        this.reset();
+      } else {
+        alert("حدث خطأ أثناء الإرسال: " + result.message);
+      }
+
+    } catch (error) {
+      alert("فشل الاتصال بالسيرفر.");
+      console.error(error);
+    }
+  });
+    </script>
 
 
 
