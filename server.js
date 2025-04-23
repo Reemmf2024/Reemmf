@@ -19,10 +19,7 @@ app.post('/submit-form', (req, res) => {
   res.json({ message: "تم استلام الرسالة بنجاح!" });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+
 
 
 
