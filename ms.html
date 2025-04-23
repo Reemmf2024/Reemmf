@@ -11,25 +11,19 @@
         /* الـ Div الخاص بالنقاط المتحركة */
         #particles-js {
             position: fixed;
-            /* ثابت يغطي الشاشة */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            /* خلف النص */
             background: linear-gradient(90deg, #740938, #AF1740, #CC2B52, #DE7C7D);
-            /* لون خلفية شفاف */
         }
 
         body {
-
             font-family: 'Dancing Script', cursive;
-            /* خط يد */
             color: #fff;
             padding: 20px;
         }
-
 
         .container {
             width: 90%;
@@ -37,8 +31,6 @@
         }
 
         .message-box {
-
-
             background-color: rgba(0, 0, 0, 0.3);
             border-radius: 30px;
             margin-bottom: 20px;
@@ -72,9 +64,7 @@
             font-size: 15px;
             text-align: left;
             color: #f1dada;
-           
         }
-
 
         .message-box .message-content {
             font-size: 16px;
@@ -82,26 +72,18 @@
             color: #f1dada;
         }
 
-        /* تحديد اتجاه النص من اليمين لليسار في حالة اللغة العربية */
         .rtl {
             direction: rtl;
             text-align: right;
             font-family: 'Amiri', serif;
-            /* خط يد عربي */
             font-weight: bold;
-            /* خط عريض */
             font-size: 20px;
-            /* تكبير الخط */
-
         }
 
-        /* تحديد اتجاه النص من اليسار لليمين في حالة اللغة الإنجليزية */
         .ltr {
             direction: ltr;
             text-align: left;
             font-family: 'Dancing Script', cursive;
-            /* الخط اليدوي */
-
         }
     </style>
 </head>
@@ -110,36 +92,35 @@
     <div id="particles-js"></div>
     <div class="container">
         <h1>Received Messages</h1>
-
-
     </div>
 
     <script>
-        fetch('/last-message')
+        // تغيير المسار إلى '/messages' للحصول على كل الرسائل
+        fetch('/messages')
             .then(res => res.json())
             .then(data => {
                 const container = document.querySelector('.container');
 
+                // التكرار على جميع الرسائل لإضافتها
                 data.forEach(message => {
                     const box = document.createElement('div');
                     box.classList.add('message-box');
 
                     box.innerHTML = `
-                  
                     <h3>Message</h3>
-                    <div class="sender"><strong>From:</strong> ${message.name} </div>
-                    <div class="email"><strong>Email:</strong>(${message.email})</div>
+                    <div class="sender"><strong>From:</strong> ${message.name}</div>
+                    <div class="email"><strong>Email:</strong> (${message.email})</div>
                     <div class="subject"><strong>Subject:</strong> ${message.subject || '(No Subject)'}</div>
                     <div class="message-content"><strong>Message:</strong> ${message.message}</div>
-                
-
                   `;
 
                     container.appendChild(box);
                 });
+            })
+            .catch(error => {
+                console.error('Error fetching messages:', error);
             });
     </script>
-
 
 </body>
 
