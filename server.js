@@ -5,6 +5,27 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3000;  // تأكد من استخدام PORT المناسب في بيئة Render
 
+const cors = require('cors');
+
+// مهم جداً!
+app.use(cors());
+app.use(express.json());
+
+app.post('/submit-form', (req, res) => {
+  const { name, email, subject, message } = req.body;
+  console.log("بيانات وصلت:", name, email, subject, message);
+
+  // رد بسيط للتأكيد
+  res.json({ message: "تم استلام الرسالة بنجاح!" });
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+
+
 // إعدادات قراءة البيانات من الفورم
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname)));
