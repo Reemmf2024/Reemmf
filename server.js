@@ -19,10 +19,6 @@ app.post('/submit-form', (req, res) => {
   res.json({ message: "تم استلام الرسالة بنجاح!" });
 });
 
-
-
-
-
 // إعدادات قراءة البيانات من الفورم
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname)));
@@ -67,15 +63,15 @@ app.post('/send-message', (req, res) => {
     });
 });
 
-// إرسال آخر رسالة من قاعدة البيانات
-app.get('/last-message', (req, res) => {
-  Message.find().sort({ _id: -1 }).limit(1)  // الحصول على أحدث رسالة
-    .then((message) => {
-      res.json(message); // 
+// إرسال جميع الرسائل من قاعدة البيانات
+app.get('/messages', (req, res) => {
+  Message.find()  // جلب كل الرسائل
+    .then((messages) => {
+      res.json(messages); // إرسال الرسائل إلى الصفحة
     })
     .catch((err) => {
-      console.error("Error fetching last message:", err);
-      res.status(500).send("Error fetching last message");
+      console.error("Error fetching messages:", err);
+      res.status(500).send("Error fetching messages");
     });
 });
 
